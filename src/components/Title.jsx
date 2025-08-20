@@ -1,13 +1,11 @@
-export default function Title() {
+export default function Title({ highlitedText, normalText, details }) {
   return (
-    <div className="text-center my-4">
-      <h3 className="text-4xl">
-        <span className="text-mullRed">Latest</span> <span>Collection —</span>
+    <div className="text-center">
+      <h3 className="text-4xl my-4">
+        <span className="text-mullRed">{highlitedText}</span>{" "}
+        <span>{normalText}—</span>
       </h3>
-      <p className="text-2xl ">
-        Shop the latest trend now with the <strong>best discount</strong> on
-        your favorite drip.
-      </p>
+      <p className="text-2xl ">{details}</p>
     </div>
   );
 }

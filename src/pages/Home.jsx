@@ -1,20 +1,61 @@
+import { assets } from "../assets/assets";
+import BestSeller from "../components/BestSeller";
+import EmailNewsLetter from "../components/EmailNewsLetter";
+import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import LatestCollections from "../components/LatestCollections";
 import Navbar from "../components/Navbar";
+import OurPolicy from "../components/OurPolicy";
 import Title from "../components/Title";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="mx-8">
-        <section className="mt-28 border">
+      <main className="mx-8 md:mx-16 mt-28">
+        <section className=" border mb-16">
           <Hero />
         </section>
-        <section>
-          <Title />
+        <section className="grid gap-24">
+          <Title
+            highlitedText="Latest"
+            normalText="Collections"
+            details="Shop the latest trend now with the best discount on your favorite drip."
+          />
           <LatestCollections />
+          <Title
+            highlitedText="Best "
+            normalText="Seller"
+            details="Today's Best Seller Items, trendy & pocket friendly."
+          />
+          <BestSeller />
         </section>
+        <section className="grid gap-8 my-24">
+          <Title highlitedText="Our " normalText="Policy" />
+          <section className="grid grid-cols-1 items-center justify-center gap-16 lg:grid-cols-3">
+            <OurPolicy
+              image={assets.exchange_icon}
+              heading="Easy exchange policy"
+              description="We offer hassel free exchange policy"
+            />
+            <OurPolicy
+              image={assets.quality_icon}
+              heading="7 days return policy"
+              description="We provide 7 days free return policy"
+            />
+            <OurPolicy
+              image={assets.support_img}
+              heading="Best customer support "
+              description="We provide 24&#10005;7 customer support"
+            />
+          </section>
+        </section>
+        <section className="my-24 text-center">
+          <EmailNewsLetter />
+        </section>
+        <footer>
+          <Footer />
+        </footer>
       </main>
     </>
   );

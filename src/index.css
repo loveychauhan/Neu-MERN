@@ -3,3 +3,20 @@
 @theme {
   --color-mullRed: #ff8989;
 }
+
+a.active li {
+  color: red;
+}
+
+@media (max-width: 640px) {
+  a.active {
+    color: white;
+    background-color: black;
+  }
+  a {
+    transition: all cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.2s;
+  }
+  a:hover {
+    text-shadow: 0dvb 0 0.5px;
+  }
+}
