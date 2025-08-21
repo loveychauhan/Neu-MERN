@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="mx-8 md:mx-16 mt-28">
+      <main className="mx-4 sm:mx-8 md:mx-16 mt-28">
         <section className=" border mb-16">
           <Hero />
         </section>
@@ -53,10 +53,10 @@ export default function Home() {
         <section className="my-24 text-center">
           <EmailNewsLetter />
         </section>
-        <footer>
-          <Footer />
-        </footer>
       </main>
+      <footer className="mx-4 sm:mx-8 md:mx-16">
+        <Footer />
+      </footer>
     </>
   );
 }

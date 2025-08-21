@@ -17,6 +17,6 @@ a.active li {
     transition: all cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.2s;
   }
   a:hover {
-    text-shadow: 0dvb 0 0.5px;
+    box-shadow: 0 0 2px;
   }
 }

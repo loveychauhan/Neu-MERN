@@ -1,23 +1,24 @@
-import { products } from "../assets/assets";
+import { Link } from "react-router-dom";
 
-export default function Card() {
-  const LatestCollections = products.slice(0, 10);
-  return LatestCollections.map((product) => {
+export default function Card({ products }) {
+  return products?.map((product) => {
     return (
       <article
-        className="grid gap-4 shadow-md backdrop-md overflow-hidden rounded-xl"
-        key={product._id}>
-        <div className="hover:scale-110 object-cover  transition-transform duration-300 hover:shadow:lg ease-in-out">
-          <img
-            className="w-full rounded-xl"
-            src={product.image[0]}
-            alt={product.image}
-          />
-        </div>
-        <div className="p-4">
-          <p>{product.name}</p>
-          <p className="font-semibold">₹ {product.price}</p>
-        </div>
+        key={product._id}
+        className="grid gap-4 shadow-md  overflow-hidden rounded-xl bg-white">
+        <Link to={`/product/${product._id}`}>
+          <div className="overflow-hidden m-4 ">
+            <img
+              src={product.image[0]}
+              alt={`Image of ${product.name}`}
+              className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110 "
+            />
+          </div>
+          <div className="p-4">
+            <p className="text-lg font-medium">{product.name}</p>
+            <p className="font-semibold text-mullRed">₹ {product.price}</p>
+          </div>
+        </Link>
       </article>
     );
   });
