@@ -3,9 +3,16 @@
 @theme {
   --color-mullRed: #ff8989;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 a.active li {
   color: red;
+}
+
+.sort {
+  width: 100%;
 }
 
 @media (max-width: 640px) {

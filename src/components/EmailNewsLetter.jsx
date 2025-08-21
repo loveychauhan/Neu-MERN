@@ -12,7 +12,7 @@ export default function EmailNewsLetter() {
           type="text"
           placeholder="email@gmal.com"
         />
-        <button className="px-8 border-[1px] border-black my-4 self-stretch sm:my-0  py-4 bg-black text-white">
+        <button className="px-8 border-[1px] text-lg border-black my-4 self-stretch sm:my-0  py-4 bg-black text-white">
           Subscribe
         </button>
       </form>

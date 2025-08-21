@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { assets } from "../assets/assets";
 import BestSeller from "../components/BestSeller";
 import EmailNewsLetter from "../components/EmailNewsLetter";
@@ -6,13 +7,25 @@ import Hero from "../components/Hero";
 import LatestCollections from "../components/LatestCollections";
 import Navbar from "../components/Navbar";
 import OurPolicy from "../components/OurPolicy";
+import SearchBar from "../components/SearchBar";
 import Title from "../components/Title";
 
 export default function Home() {
+  const [searchbtnClick, setSearchbtnClick] = useState(false);
+  
+  const offset = searchbtnClick ? "mt-10" : "mt-20";
+
   return (
     <>
-      <Navbar />
-      <main className="mx-4 sm:mx-8 md:mx-16 mt-28">
+      <Navbar setSearchbtnClick={setSearchbtnClick} />
+      <section
+        className={`mx-4 sm:mx-8 md:mx-16 ${
+          searchbtnClick ? "mt-20 opacity-100" : "opacity-0"
+        } transition-all duration-200 ease-in-out`}>
+        <SearchBar searchbtnClick={searchbtnClick} />
+      </section>
+      <main
+        className={`mx-4 sm:mx-8 md:mx-16 ${offset} transition-all duration-200 ease-in-out`}>
         <section className=" border mb-16">
           <Hero />
         </section>
