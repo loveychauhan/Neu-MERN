@@ -12,7 +12,6 @@ import Title from "../components/Title";
 
 export default function Home() {
   const [searchbtnClick, setSearchbtnClick] = useState(false);
-  
   const offset = searchbtnClick ? "mt-10" : "mt-20";
 
   return (
@@ -20,7 +19,7 @@ export default function Home() {
       <Navbar setSearchbtnClick={setSearchbtnClick} />
       <section
         className={`mx-4 sm:mx-8 md:mx-16 ${
-          searchbtnClick ? "mt-20 opacity-100" : "opacity-0"
+          searchbtnClick ? "mt-20 opacity-100 scroll-my-0" : "opacity-0"
         } transition-all duration-200 ease-in-out`}>
         <SearchBar searchbtnClick={searchbtnClick} />
       </section>

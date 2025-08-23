@@ -3,12 +3,28 @@ import { products } from "../assets/assets";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { useFetcher, useNavigate } from "react-router-dom";
+import AnimatedSelect from "./AnimatedSelect";
 
 export default function Collection() {
   const [allCollection, setAllCollection] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [priceSorting, setPriceSorting] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [clearAll, setClearAll] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    console.log("clear All");
+    if (clearAll) {
+      setCategory([]);
+      setSubCategory([]);
+    }
+  }, [clearAll]);
 
   useEffect(() => {
     let allProduct = [...products];
@@ -30,12 +46,11 @@ export default function Collection() {
       allProduct = allProduct.sort((a, b) => b.price - a.price);
     }
     setAllCollection(allProduct);
-  }, [category, subCategory, priceSorting]);
-
-  // let filtered = [];
+  }, [category, subCategory, priceSorting, clearAll]);
 
   const categoryHandler = (e) => {
     const selectedCategory = e.target.value.toLowerCase();
+    setIsChecked((prev) => !prev);
 
     let updatedChecked;
     if (e.target.checked) {
@@ -62,38 +77,62 @@ export default function Collection() {
     setPriceSorting(sortOption);
   };
 
+  const handleClearAll = () => {
+    setCategory([]);
+    setSubCategory([]);
+    setPriceSorting("");
+    setAllCollection(products); // optional, if you want instant reset
+  };
+
   return (
     <div>
       <Navbar />
 
       <main className="mx-4 sm:mx-8 md:mx-16 mt-28 ">
         <section className="flex items-center flex-wrap gap-4 justify-between my-8">
-          <h2 className=" text-2xl font-medium ">Filter—</h2>
-          <select
-            name=""
-            id=""
-            className="outline-0 p-2 border-[1px] "
-            onChange={(e) => optionsHandler(e)}>
-            <option className="sort" value="">
-              Sort By: Relevant
-            </option>
-            <option className="sort" value="lowToHigh">
-              Price: Low to High
-            </option>
-            <option className="sort" value="HighToLow">
-              Price: High to Low
-            </option>
-          </select>
+          <div
+            className=" text-2xl flex items-center gap-1 font-medium cursor-context-menu "
+            onClick={() => setVisible((prev) => !prev)}>
+            Filter{" "}
+            <button>
+              <RiArrowDropDownLine
+                className={`text-3xl mt-1 transition-all ease-in-out duration-300 ${
+                  visible ? "" : "rotate-180"
+                }`}
+              />
+            </button>
+          </div>
+          {/* <select
+            name="sort"
+            id="sort"
+            onChange={optionsHandler}
+            className="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-mullRed focus:border-mullRed transition-all duration-300">
+            <option value="">Sort By: Relevant</option>
+            <option value="lowToHigh">Price: Low to High</option>
+            <option value="HighToLow">Price: High to Low</option>
+          </select> */}
+          <AnimatedSelect optionsHandler={optionsHandler} />
         </section>
 
-        <section className="flex flex-col md:flex-row gap-8">
-          <section className="flex-shrink-0 w-full md:w-[240px]">
-            <button className="px-4 py-2 border-[1px] rounded-xl]">
-              Clear All
-            </button>
-            <div className="flex flex-col gap-6">
-              <div className=" bg-white border border-gray-200 rounded-xl p-6 shadow-sm ">
-                <p className="mb-4 font-medium">Category</p>
+        <section
+          className={`grid grid-cols-1 gap-8 items-start  md:grid-cols-[auto_1fr]  `}>
+          <section
+            className={`max-w-[768px] w-full md:w-[240px] border border-gray-200 rounded-xl shadow-sm transition-all duration-700 ease-in-out origin-top transform overflow-hidden ${
+              visible
+                ? "p-6 opacity-100 "
+                : "p-0 opacity-0 max-h-0 pointer-events-none w-0"
+            }`}>
+            {visible && (
+              <button
+                className={`px-2 py-1 border-[1px] mb-2 md:mb-4 text-[12px] rounded-[12px]`}
+                onClick={handleClearAll}>
+                Clear All
+              </button>
+            )}
+
+            <div className="flex flex-col gap-4 justify-center md:6">
+              <div>
+                <p className="mb-2 md:4 font-medium">Category</p>
                 <form className="flex flex-wrap md:items-start md:flex-col items-center justify-between gap-4">
                   {[
                     { id: "women", label: "Women" },
@@ -108,8 +147,11 @@ export default function Collection() {
                         type="checkbox"
                         id={id}
                         value={label}
+                        checked={isChecked}
                         onChange={(e) => categoryHandler(e)}
-                        className="w-4 h-4 accent-mullRed cursor-pointer"
+                        className={`w-4 h-4 cursor-pointer ${
+                          isChecked ? "accent-mullRed" : ""
+                        }`}
                       />
                       <span className="text-sm font-medium text-gray-700">
                         {label}
@@ -119,9 +161,8 @@ export default function Collection() {
                 </form>
               </div>
 
-              <div className=" bg-white border border-gray-200 rounded-xl p-6 shadow-sm ">
-                <p className="mb-4 font-medium">Subcategory</p>
-
+              <div>
+                <p className="mb-2 md:4 font-medium">Subcategory</p>
                 <form className="flex flex-wrap md:items-start md:flex-col items-center justify-between gap-4">
                   {[
                     { id: "topwear", label: "Topwear" },
@@ -148,8 +189,10 @@ export default function Collection() {
               </div>
             </div>
           </section>
-
-          <section className="grid items-center overflow-scroll sm:grid-cols-2 lg:grid-cols-4 gap-8 ">
+          <section
+            className={`grid  grid-cols-[repeat(auto-fit,minmax(250px,1fr))] sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto items-start transition-all duration-500 ${
+              visible ? "" : "col-span-3 row-span-2"
+            }`}>
             <Card
               products={allCollection.length > 0 ? allCollection : products}
             />
@@ -159,6 +202,8 @@ export default function Collection() {
       <footer className="mx-4 sm:mx-8 md:mx-16 mt-24">
         <Footer />
       </footer>
+
+      <div></div>
     </div>
   );
 }
