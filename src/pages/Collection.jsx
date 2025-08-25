@@ -4,27 +4,15 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useFetcher, useNavigate } from "react-router-dom";
-import AnimatedSelect from "./AnimatedSelect";
+import AnimatedSelect from "../components/AnimatedSelect";
 
 export default function Collection() {
   const [allCollection, setAllCollection] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [priceSorting, setPriceSorting] = useState("");
-  const [visible, setVisible] = useState(false);
-  const [clearAll, setClearAll] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
-
-  const navigation = useNavigate();
-
-  useEffect(() => {
-    console.log("clear All");
-    if (clearAll) {
-      setCategory([]);
-      setSubCategory([]);
-    }
-  }, [clearAll]);
 
   useEffect(() => {
     let allProduct = [...products];
@@ -46,7 +34,7 @@ export default function Collection() {
       allProduct = allProduct.sort((a, b) => b.price - a.price);
     }
     setAllCollection(allProduct);
-  }, [category, subCategory, priceSorting, clearAll]);
+  }, [category, subCategory, priceSorting]);
 
   const categoryHandler = (e) => {
     const selectedCategory = e.target.value.toLowerCase();
@@ -91,13 +79,13 @@ export default function Collection() {
       <main className="mx-4 sm:mx-8 md:mx-16 mt-28 ">
         <section className="flex items-center flex-wrap gap-4 justify-between my-8">
           <div
-            className=" text-2xl flex items-center gap-1 font-medium cursor-context-menu "
+            className="flex justify-between items-center px-4 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-mullRed transition-all duration-300 "
             onClick={() => setVisible((prev) => !prev)}>
             Filter{" "}
             <button>
               <RiArrowDropDownLine
-                className={`text-3xl mt-1 transition-all ease-in-out duration-300 ${
-                  visible ? "" : "rotate-180"
+                className={`text-xl mt-0.5 transform  transition-transform duration-300 ${
+                  visible ? "rotate-180" : ""
                 }`}
               />
             </button>
@@ -114,22 +102,14 @@ export default function Collection() {
           <AnimatedSelect optionsHandler={optionsHandler} />
         </section>
 
-        <section
-          className={`grid grid-cols-1 gap-8 items-start  md:grid-cols-[auto_1fr]  `}>
+        <section className="flex items-start gap-x-8 md:gap-y-8 md:gap-x-0  justify-between flex-col md:flex-row md:items-start">
           <section
-            className={`max-w-[768px] w-full md:w-[240px] border border-gray-200 rounded-xl shadow-sm transition-all duration-700 ease-in-out origin-top transform overflow-hidden ${
-              visible
-                ? "p-6 opacity-100 "
-                : "p-0 opacity-0 max-h-0 pointer-events-none w-0"
-            }`}>
-            {visible && (
-              <button
-                className={`px-2 py-1 border-[1px] mb-2 md:mb-4 text-[12px] rounded-[12px]`}
-                onClick={handleClearAll}>
-                Clear All
-              </button>
-            )}
-
+            className={`transition-all duration-700 ease-in-out w-full  overflow-hidden border border-gray-200 rounded-xl shadow-sm
+    ${
+      visible
+        ? "max-h-[1000px] w-full md:max-w-[250px] mb-8 mr-8 opacity-100 p-6"
+        : "max-h-0 opacity-0 p-0 md:max-w-0 pointer-events-none mb-0"
+    }`}>
             <div className="flex flex-col gap-4 justify-center md:6">
               <div>
                 <p className="mb-2 md:4 font-medium">Category</p>
@@ -147,11 +127,8 @@ export default function Collection() {
                         type="checkbox"
                         id={id}
                         value={label}
-                        checked={isChecked}
                         onChange={(e) => categoryHandler(e)}
-                        className={`w-4 h-4 cursor-pointer ${
-                          isChecked ? "accent-mullRed" : ""
-                        }`}
+                        className={`w-4 h-4 cursor-pointer accent-mullRed`}
                       />
                       <span className="text-sm font-medium text-gray-700">
                         {label}
@@ -178,7 +155,7 @@ export default function Collection() {
                         id={id}
                         value={label}
                         onChange={(e) => subCategoryHandler(e)}
-                        className="w-4 h-4 accent-mullRed cursor-pointer"
+                        className="w-4 h-4 bg-mullRed cursor-pointer"
                       />
                       <span className="text-sm font-medium text-gray-700">
                         {label}
@@ -190,9 +167,8 @@ export default function Collection() {
             </div>
           </section>
           <section
-            className={`grid  grid-cols-[repeat(auto-fit,minmax(250px,1fr))] sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto items-start transition-all duration-500 ${
-              visible ? "" : "col-span-3 row-span-2"
-            }`}>
+            className={`grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] pb-4  flex-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto items-start
+    transition-all duration-700 ease-in-out`}>
             <Card
               products={allCollection.length > 0 ? allCollection : products}
             />
