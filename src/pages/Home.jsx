@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { assets } from "../assets/assets";
+import { useContext, useState } from "react";
+import { assets, products } from "../assets/assets";
 import BestSeller from "../components/BestSeller";
 import EmailNewsLetter from "../components/EmailNewsLetter";
 import Footer from "../components/Footer";
@@ -9,11 +9,13 @@ import Navbar from "../components/Navbar";
 import OurPolicy from "../components/OurPolicy";
 import SearchBar from "../components/SearchBar";
 import Title from "../components/Title";
+import { ShopContext } from "../context/ShopContext";
 
 export default function Home() {
   const [searchbtnClick, setSearchbtnClick] = useState(false);
   const offset = searchbtnClick ? "mt-10" : "mt-20";
-
+  const { name, products } = useContext(ShopContext);
+  console.log("home ", products);
   return (
     <>
       <Navbar setSearchbtnClick={setSearchbtnClick} />

@@ -2,15 +2,21 @@ import { useParams } from "react-router-dom";
 import { products } from "../assets/assets";
 import Navbar from "../components/Navbar";
 import Rating from "../components/Rating";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Title from "../components/Title";
 import Card from "../components/Card";
+import { ShopContext } from "../context/ShopContext";
 
 function Product() {
   const { productId } = useParams();
   const allProducts = products;
   const [myProd] = allProducts.filter((prod) => prod._id === productId);
   const [toggle, setToggle] = useState("description");
+  const [sizeSelected, setSizeSelected] = useState("");
+  const [showmodal, setShowModal] = useState(false);
+
+  const { addToCart } = useContext(ShopContext);
+  // const add = () => console.log("jio");
   const releatedProducts = allProducts
     .filter(
       (product) =>
@@ -18,14 +24,20 @@ function Product() {
         product.subCategory === myProd.subCategory
     )
     .slice(0, 5);
-  console.log(releatedProducts);
+
+  // const cartHandler = (e) => {
+  //   if (sizeSelected === "") {
+  //     console.log(showmodal);
+  //     setShowModal(true);
+  //   }
+  // };
 
   return (
     <>
       <Navbar />
 
       <main className="mx-4 max-w-[1040px] md:mx-auto  mt-28 ">
-        <section className="grid grid-cols-1 items-start  gap-8 md:grid-cols-2">
+        <section className="grid grid-cols-1 items-start justify-items-center  gap-8 md:grid-cols-2">
           <div>
             <img src={myProd.image[0]} alt={`Image of ${myProd.name}`} />
           </div>
@@ -50,13 +62,40 @@ function Product() {
                 return (
                   <button
                     key={size}
-                    className="px-4 py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm pointer-events-none">
+                    onClick={(e) => setSizeSelected(size)}
+                    className={`px-4 py-2 border-gray-300 border-2 rounded-md bg-white text-sm text-gray-700 shadow-sm  ${
+                      sizeSelected === size ? "border-mullRed " : ""
+                    }`}>
                     {size}
                   </button>
                 );
               })}
             </div>
-            <button className="px-4 text-gray-900 font-medium py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm pointer-events-none">
+            {showmodal && (
+              <section className="">
+                <h2>Choose a size</h2>
+                <div
+                  className="flex items-center flex-col justify-between gap-2 max-w-max
+          flex-wrap">
+                  {" "}
+                  {myProd.sizes.map((size) => {
+                    return (
+                      <button
+                        key={size}
+                        onClick={(e) => setSizeSelected(size)}
+                        className={`px-4 py-2 border-gray-300 border-2 rounded-md bg-white text-sm text-gray-700 shadow-sm  ${
+                          sizeSelected === size ? "border-mullRed " : ""
+                        }`}>
+                        {size}
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+            <button
+              onClick={(e) => addToCart(myProd._id, sizeSelected)}
+              className="px-4 text-gray-900 font-medium py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm ">
               Add to Cart
             </button>
             <hr className="my-8" />
