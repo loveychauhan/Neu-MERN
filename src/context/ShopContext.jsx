@@ -7,8 +7,10 @@ function ShopContextProvider({ children }) {
   const name = "Lovey";
   const [cartItem, setCardItem] = useState({});
   const addToCart = (id, size) => {
+
+
     if (!size) {
-      return alert("Size is not selected");
+      return alert("select a size");
     }
     let cartData = structuredClone(cartItem);
 
@@ -28,13 +30,11 @@ function ShopContextProvider({ children }) {
     setCardItem(cartData);
   };
 
-  useEffect(() => {
-    console.log(cartItem);
-  }, [cartItem]);
   const obj = {
     name,
     products,
     addToCart,
+    cartItem,
   };
   return <ShopContext.Provider value={obj}>{children}</ShopContext.Provider>;
 }

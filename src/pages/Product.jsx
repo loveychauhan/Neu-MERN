@@ -13,24 +13,16 @@ function Product() {
   const [myProd] = allProducts.filter((prod) => prod._id === productId);
   const [toggle, setToggle] = useState("description");
   const [sizeSelected, setSizeSelected] = useState("");
-  const [showmodal, setShowModal] = useState(false);
-
   const { addToCart } = useContext(ShopContext);
-  // const add = () => console.log("jio");
+
   const releatedProducts = allProducts
     .filter(
       (product) =>
         product.category === myProd.category &&
         product.subCategory === myProd.subCategory
     )
+    .filter((item) => item._id !== myProd._id)
     .slice(0, 5);
-
-  // const cartHandler = (e) => {
-  //   if (sizeSelected === "") {
-  //     console.log(showmodal);
-  //     setShowModal(true);
-  //   }
-  // };
 
   return (
     <>
@@ -71,28 +63,7 @@ function Product() {
                 );
               })}
             </div>
-            {showmodal && (
-              <section className="">
-                <h2>Choose a size</h2>
-                <div
-                  className="flex items-center flex-col justify-between gap-2 max-w-max
-          flex-wrap">
-                  {" "}
-                  {myProd.sizes.map((size) => {
-                    return (
-                      <button
-                        key={size}
-                        onClick={(e) => setSizeSelected(size)}
-                        className={`px-4 py-2 border-gray-300 border-2 rounded-md bg-white text-sm text-gray-700 shadow-sm  ${
-                          sizeSelected === size ? "border-mullRed " : ""
-                        }`}>
-                        {size}
-                      </button>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
+
             <button
               onClick={(e) => addToCart(myProd._id, sizeSelected)}
               className="px-4 text-gray-900 font-medium py-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm ">

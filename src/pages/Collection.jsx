@@ -85,7 +85,7 @@ export default function Collection() {
             <button>
               <RiArrowDropDownLine
                 className={`text-xl mt-0.5 transform  transition-transform duration-300 ${
-                  visible ? "rotate-180" : ""
+                  visible ? "" : "rotate-180"
                 }`}
               />
             </button>
