@@ -1,10 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Sidebar from "./Sidebar";
+import { ShopContext } from "../context/ShopContext";
 
 export default function Navbar({ setSearchbtnClick }) {
   const [visible, setVisible] = useState(false);
+  const { quantity } = useContext(ShopContext);
   return (
     <>
       <header className="flex items-center justify-between z-50  fixed top-0 px-4 bg-white md:px-16 py-2 md:px-4 w-full shadow-md backdrop-md ">
@@ -42,13 +44,17 @@ export default function Navbar({ setSearchbtnClick }) {
             alt="search icon"
           />
 
-          <Link to="/cart">
+          <Link to="/cart" className="relative ">
             <img
               src={assets.cart_icon}
-              className="w-5 cursor-pointer"
-              alt="search icon"
+              alt="Cart"
+              className="w-6 h-6 cursor-pointer transition-transform duration-300 "
             />
+            <span className="absolute -top-2 -right-2 bg-black text-white text-[10px] font-semibold rounded-full w-5 h-5 flex items-center justify-center shadow-md">
+              {quantity}
+            </span>
           </Link>
+
           <img
             onClick={() => setVisible(true)}
             src={assets.menu_icon}

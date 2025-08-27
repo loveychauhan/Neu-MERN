@@ -7,12 +7,16 @@ import { assets } from "../assets/assets";
 export default function Cart() {
   const { cartItem, products } = useContext(ShopContext);
   const [productData, setProductData] = useState([]);
+  let total = 0;
+  let totalQuantity = 1;
 
   useEffect(() => {
     let tempData = [];
     for (const id in cartItem) {
       for (let s in cartItem[id]) {
         if (cartItem[id][s] > 0) {
+          totalQuantity += cartItem[id][s];
+          console.log(totalQuantity);
           tempData.push({
             id: id,
             size: s,
@@ -21,7 +25,6 @@ export default function Cart() {
         }
       }
     }
-
     const data = tempData.map((item) => {
       const product = products.find((product) => product._id === item.id);
       return {
@@ -31,56 +34,80 @@ export default function Cart() {
       };
     });
 
+    data.forEach((item) => {
+      total += item.price * item.quantity;
+      console.log(total);
+    });
+
     setProductData(data);
   }, [cartItem]);
   console.log(productData);
+
+  // const clickHandler = (e) => {
+  //   console.log(totalQuantity);
+  // };
   return (
     <div>
       <Navbar />
-      <main className="mx-4  mt-28 ">
+      <main className="mx-4  mt-28 max-w-[1024px] mx-auto">
         <Title highlitedText="Cart" normalText="items" />
 
         {productData.map((item) => {
           return (
-            <div className="grid grid-cols-1 sm:grid-cols-[4fr_2.5fr_0.5fr] items-center border-b py-4 px-2 gap-6 sm:gap-4 hover:bg-gray-50 transition-colors duration-300">
-              {/* Product Info */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <img
-                  src={item.image[0]}
-                  alt={`Image of ${item.name}`}
-                  className=" aspect-4/3 object-contain  rounded-md shadow-sm"
-                />
-                <div className="space-y-1">
-                  <h4 className="text-base font-semibold text-gray-800">
+            <section
+              key={item.size}
+              className="grid grid-cols-1 sm:grid-cols-2 bg-gray-100 rounded-[8px] gap-4 p-4 my-2 items-center ">
+              <div className="flex items-start gap-4 ">
+                <div className="aspect-square w-32">
+                  <img
+                    className="w-full h-full object-contain"
+                    src={item.image[0]}
+                    alt={`Image of ${item.name}`}
+                  />
+                </div>
+
+                <div className="flex-1 space-y-2">
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-700">
                     {item.name}
-                  </h4>
-                  <p className="text-sm font-medium text-mullRed">
-                    ₹{item.price}
-                  </p>
-                  <p className="text-xs text-gray-500">Size: {item.size}</p>
+                  </h3>
+
+                  <div className="">
+                    <p className="text-xl sm:text-2xl font-medium text-gray-900">
+                      ${item.price * item.quantity}
+                    </p>
+                    <p className="text-gray-700">size: {item.size}</p>
+                  </div>
                 </div>
               </div>
-
-              {/* Quantity Controls */}
-              <div className="flex items-center justify-start sm:justify-center gap-3 text-lg">
-                <button className="px-2 py-1 border rounded-md hover:bg-gray-100">
-                  −
-                </button>
-                <p className="font-medium">{item.quantity}</p>
-                <button className="px-2 py-1 border rounded-md hover:bg-gray-100">
-                  +
+              <div className="flex items-center justify-between px-2">
+                {" "}
+                <div className="flex items-center flex-1 justify-between border px-4 py-2 rounded-xl text-lg max-w-[120px] bg-white shadow-sm">
+                  <button
+                    className="hover:text-indigo-600"
+                    onClick={(e) => clickHandler(e)}>
+                    −
+                  </button>
+                  <p className="font-medium">{item.quantity}</p>
+                  <button
+                    onClick={(e) => clickHandler(e)}
+                    className="hover:text-indigo-600">
+                    +
+                  </button>
+                </div>
+                <button className="ml-4 hover:scale-105 transition-transform">
+                  <img
+                    className="w-6 h-6"
+                    src={assets.bin_icon}
+                    alt="Delete item"
+                  />
                 </button>
               </div>
-
-              {/* Remove Icon */}
-              <div className="flex justify-start sm:justify-center">
-                <button className="p-2 hover:bg-red-50 rounded-full transition-colors">
-                  <img src={assets.bin_icon} alt="Remove" className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
+            </section>
           );
         })}
+
+        <Title highlitedText="Your" normalText="total" />
+        <h2>{total}</h2>
       </main>
     </div>
   );
