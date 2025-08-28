@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mullRed: #ff8989;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+a.active li {
+  color: red;
+}
+
+.sort {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  a.active {
+    color: white;
+    background-color: black;
+  }
+  a {
+    transition: all cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.2s;
+  }
+  a:hover {
+    box-shadow: 0 0 2px;
+  }
+}
+
