@@ -10,18 +10,19 @@ const app = express()
 dotenv.config()
 
 // MiddleWare
+app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(cors())
-
-//cloudinary
-cloudinaryUpload()
 
 //Connection 
 connectDb()
 
+//cloudinary
+cloudinaryUpload()
+
+
 // Routing
-app.use("/", appRouter)
+app.use(appRouter)
 
 
 // Listening

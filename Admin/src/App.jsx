@@ -12,7 +12,7 @@ function App() {
     <>
       {token && <Navbar />}
       <div className="flex flex-col mx-4  sm:flex-row items-center sm:items-start ">
-        <Sidebar />
+        {token && <Sidebar />}
         <div className="w-full flex-1">
           <Routes>
             {token ? (
@@ -22,7 +22,7 @@ function App() {
                 <Route path="/order-item" element={<Home />} />
               </>
             ) : (
-              <Route path="/login" element={<Login />} />
+              <Route index element={<Login />} />
             )}
           </Routes>
         </div>

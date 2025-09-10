@@ -13,5 +13,4 @@ const productSchema = new mongoose.Schema({
     bestseller: { type: Boolean },
 })
 
-export const productA = new mongoose.model('productA', productSchema, 'productlist')
-export const productB = new mongoose.model('productB', productSchema, 'products')
+export const productA = mongoose.models.productA || mongoose.model('productA', productSchema, 'productlists')

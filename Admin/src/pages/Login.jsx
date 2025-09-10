@@ -21,7 +21,8 @@ function Login() {
     }
   };
   return (
-    <main className="mt-28">
+    <main className="mt-28 max-w-[768px] mx-auto">
+      <h1 className="text-3xl font-semibold text-center my-4">Login</h1>
       <form
         action=""
         className="border p-8 flex flex-col gap-4"

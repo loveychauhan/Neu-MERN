@@ -1,9 +1,14 @@
 import userModel from "../models/userModel.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { productA } from "../models/product.js"
 
 export const home = async (req, res) => {
-    res.send('home')
+    const data = await productA.find()
+    return res.json({
+        message: 'data send',
+        productData: data
+    })
 
 }
 

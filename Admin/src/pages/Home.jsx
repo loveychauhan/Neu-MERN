@@ -20,17 +20,20 @@ export default function Home() {
   const [isBestSeller, setIsBestSeller] = useState(false);
 
   // console.log(images);
-
+  // console.log(images[0]?.file);
   const sizeSelector = (e) => {
     sizes.includes(e.target.innerText)
       ? setSizes(sizes.filter((size) => size !== e.target.innerText))
       : setSizes((prev) => [...prev, e.target.innerText]);
   };
+
   // console.log(isBestSeller);
 
   const formHandler = async (e) => {
     e.preventDefault();
+
     const totalImages = images.filter((image) => image !== null);
+    console.log(totalImages[0].file);
 
     const resetForm = () => {
       // setImages([]);
@@ -48,9 +51,11 @@ export default function Home() {
       formData.append("name", productName);
       formData.append("description", productDescription);
       formData.append("price", price);
+
       totalImages.forEach((file) => {
-        formData.append(`image`, file.preview);
+        formData.append("image", file.file);
       });
+
       formData.append("category", categoryValue);
       formData.append("subCategory", subCategoryValue);
       formData.append("sizes", JSON.stringify(sizes));
@@ -58,10 +63,16 @@ export default function Home() {
 
       const response = await axios.post(
         "http://localhost:8000/sendData",
-        formData
+        formData,
+        {
+          headers: {
+            Authorization: "1243",
+          },
+        }
       );
 
-      console.log(response.data.data);
+      console.log("response", response.data);
+
       if (response.data.success) {
         resetForm();
       } else {
@@ -77,7 +88,6 @@ export default function Home() {
       <form
         className="space-y-8 mb-6 max-w-[840px]"
         onSubmit={(e) => formHandler(e)}>
-        {/* Upload Section */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {Array.from({ length: 4 }, (_, i) => (
             <div key={i} className="flex flex-col items-center">
@@ -95,12 +105,14 @@ export default function Home() {
                 )}
                 <p className="text-xs text-blue-700">Upload</p>
               </label>
+
               <input
                 type="file"
                 id={`upload-${i}`}
                 className="hidden"
                 onChange={(e) => {
                   const file = e.target.files[0];
+                  console.log(file);
                   const updated = [...images];
                   updated[i] = {
                     file,
@@ -113,7 +125,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Product Info Section */}
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div className="flex flex-col sm:col-span-2 space-y-2">
             <label htmlFor="pName" className="font-medium">
@@ -169,7 +180,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Price & Sizes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div className="flex flex-col space-y-2">
             <label htmlFor="price" className="font-medium">
