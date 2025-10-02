@@ -2,7 +2,6 @@ import { v2 as cloudinary } from 'cloudinary'
 import dotenv from "dotenv"
 dotenv.config()
 
-console.log('env', process.env.cloud_name)
 async function cloudinaryUpload() {
     cloudinary.config({
         cloud_name: "drv6vorri",

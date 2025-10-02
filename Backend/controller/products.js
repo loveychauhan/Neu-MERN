@@ -8,22 +8,17 @@ export const list = async (req, res) => {
 
 export const productList = async (req, res) => {
     const receivedData = req.body;
-    console.log(req.headers)
     const images = req.files
 
-    // console.log(images)
-
-
-
+    
     const ImageUrl = await Promise.all(
         images.map((image) => {
             return cloudinary.uploader.upload(image.path)
         }
         ))
 
-
-
-    // console.log(ImageUrl)
+    
+    // console.log(receivedData)
 
 
     res.status(200).json({

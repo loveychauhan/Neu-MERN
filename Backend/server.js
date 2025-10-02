@@ -23,6 +23,9 @@ cloudinaryUpload()
 
 // Routing
 app.use(appRouter)
+// app.get("/", (req, res) => {
+//     res.send('home')
+// })
 
 
 // Listening
