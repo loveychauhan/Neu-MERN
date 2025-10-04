@@ -20,7 +20,7 @@ export const loginGet = (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body
-    console.log(email, password)
+    // console.log(email, password)
 
     const user = await userModel.findOne({ email })
 
@@ -35,8 +35,8 @@ export const login = async (req, res) => {
             return res.json({ message: "password did not match" })
         }
 
-        const token = jwt.sign({ message: 'user password is correct ', password: user.password }, 'lovey')
-        res.json({ token: token, message: 'user login successfully' })
+        const token = jwt.sign({ message: 'user password is correct ', user: user }, 'lovey')
+        res.json({ token: token, message: 'user login successfully', email: email })
     })
 }
 
@@ -63,4 +63,9 @@ export const signUp = async (req, res) => {
         })
     })
     res.json({ message: 'user created successfully' })
+}
+
+
+export const cartItem = (req, res) => {
+    res.json({ message: 'cart item added' })
 }
