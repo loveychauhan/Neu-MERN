@@ -1,8 +1,9 @@
 import express from 'express'
-import { cartItem, home, login, signUp } from '../controller/admin.js'
+import { home, login, signUp } from '../controller/admin.js'
 import { list, productList } from '../controller/products.js'
 import upload from '../utitlity/multer.js'
 import AuthUser from '../middleware/AuthUser.js'
+import { cartItem } from '../controller/cartController.js'
 
 
 const appRouter = express.Router()

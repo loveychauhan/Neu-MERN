@@ -20,11 +20,8 @@ export const loginGet = (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body
-    // console.log(email, password)
 
     const user = await userModel.findOne({ email })
-
-    // console.log(user)
 
     if (!user) {
         return res.json({ message: 'User not exist' })
@@ -42,30 +39,26 @@ export const login = async (req, res) => {
 
 
 export const signUp = async (req, res) => {
-    const { name, email, password } = req.body
-    // console.log(name, email, password)
+    try {
+        const { name, email, password } = req.body
 
-    const user = await userModel.findOne({ email })
+        const user = await userModel.findOne({ email })
 
-    if (user) return res.json({ message: 'User already exist' })
+        if (user) return res.json({ message: 'User already exist' })
 
-    bcrypt.genSalt(10, function (err, salt) {
-        bcrypt.hash(password, salt, function (err, hash) {
-            if (err) {
-                return res.json({ message: 'user cretation failed' })
-            }
-            userModel.create({
-                name: name,
-                email: email,
-                password: hash
-            })
-
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+        const newUser = await userModel.create({
+            name: name,
+            email: email,
+            password: hashedPassword,
         })
-    })
-    res.json({ message: 'user created successfully' })
+
+        res.json({ message: 'user created successfully' })
+    } catch (error) {
+        return res.status(500).json({ message: "User creation failed" });
+    }
+
 }
 
 
-export const cartItem = (req, res) => {
-    res.json({ message: 'cart item added' })
-}

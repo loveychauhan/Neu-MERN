@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String },
     password: { type: String },
     cartData: { type: Object, default: {} }
-})
+}, { minimize: false })
 
-const userModel = mongoose.model.userModel || mongoose.model('userModel', userSchema)
+const userModel = mongoose.models.userModel || mongoose.model('userModel', userSchema)
 export default userModel
