@@ -7,11 +7,8 @@ export const home = async (req, res) => {
     const data = await productA.find()
     return res.json({
         message: 'data send',
-        productData: data
+        productData: data,
     })
-
-    // res.send('home page')
-
 }
 
 export const loginGet = (req, res) => {
@@ -33,8 +30,9 @@ export const login = async (req, res) => {
         }
 
         const token = jwt.sign({ message: 'user password is correct ', user: user }, 'lovey')
-        res.json({ token: token, message: 'user login successfully', email: email })
+        res.json({ message: 'user Login successfully', token, user })
     })
+
 }
 
 
@@ -54,11 +52,13 @@ export const signUp = async (req, res) => {
             password: hashedPassword,
         })
 
-        res.json({ message: 'user created successfully' })
+        const createUser = await userModel.findOne({ email })
+
+        const token = jwt.sign({ message: 'user password is correct ', user: createUser }, 'lovey')
+        res.json({ message: 'user created successfully', token, user })
     } catch (error) {
         return res.status(500).json({ message: "User creation failed" });
     }
 
 }
-
 

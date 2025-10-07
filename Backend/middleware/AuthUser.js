@@ -8,11 +8,11 @@ export default function AuthUser(req, res, next) {
 
     try {
         const tokenVerify = jwt.verify(authToken, 'lovey')
-        // console.log(tokenVerify.user._id)
         req.body.userId = tokenVerify.user._id
         next()
     } catch (error) {
         res.json({ message: error.message, success: false })
+        console.log('error')
     }
 
 }  
