@@ -17,36 +17,6 @@ Fast & Lightweight: React’s virtual DOM and MongoDB queries ensure quick load 
 
 🛠 Tech Stack
 Built with cutting-edge tools for a robust full-stack experience:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 LayerTechnologiesPurposeFrontendReact.js, Tailwind CSS, Framer MotionDynamic UI, Styling, AnimationsBackendNode.js, Express.jsAPI Server, Business LogicDatabaseMongoDB (Mongoose)Data Storage, Schema ManagementToolsGit & GitHub, npm/yarnVersion Control, Dependencies
 
 Why MERN? All JavaScript, fast development, and scalable for e-commerce needs.
@@ -60,7 +30,7 @@ MongoDB (local installation or Atlas cloud)
 Git
 
 Installation
-
+```
 Clone the Repository:
 textgit clone https://github.com/loveychauhan/E-Commerce.git
 cd E-Commerce
@@ -72,8 +42,9 @@ npm install
 # Install frontend dependencies (open a new terminal)
 cd client
 npm install
-
+```
 Configure Environment:
+```
 
 Create a .env file in the root directory based on .env.example (if provided, or create one):
 textMONGODB_URI=your_mongodb_connection_string  # e.g., mongodb://localhost:27017/ecommerce or Atlas URL
@@ -82,9 +53,10 @@ JWT_SECRET=your_secret_key  # Optional, for future authentication
 
 For MongoDB Atlas, sign up at mongodb.com/cloud/atlas and copy your connection string.
 
-
+```
 Run the Application:
 text# Start the backend server (root directory)
+```
 npm run server
 # Backend runs on http://localhost:5000
 
@@ -104,9 +76,11 @@ Deployment
 Frontend: Deploy to Vercel or Netlify by linking your GitHub repo.
 Backend: Deploy to Render, Heroku, or Railway, ensuring env vars are set.
 Database: Use MongoDB Atlas for a production-ready cloud database.
+```
 
 📁 Project Structure
-textE-Commerce/
+```
+E-Commerce/
 ├── backend/          # Express.js server, routes, models
 │   ├── models/       # MongoDB schemas (e.g., Product, Cart, Category)
 │   ├── routes/       # API endpoints (e.g., /products, /cart)
@@ -121,14 +95,13 @@ textE-Commerce/
 │   └── tailwind.config.js  # Tailwind CSS configuration
 ├── .env.example      # Template for environment variables
 ├── README.md         # This file!
-🤝 Contributing
-Love this project? Want to make it better? Here’s how you can help:
 
 Fork the repository.
 Create a new branch (git checkout -b feature/your-feature).
 Make your changes and commit (git commit -m "Add your feature").
 Push to your branch (git push origin feature/your-feature).
 Open a Pull Request with a clear description of your changes.
+```
 
 Please follow the Contributor Covenant Code of Conduct.
 📜 License
