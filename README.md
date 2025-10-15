@@ -17,6 +17,7 @@ Fast & Lightweight: React’s virtual DOM and MongoDB queries ensure quick load 
 
 🛠 Tech Stack
 Built with cutting-edge tools for a robust full-stack experience:
+<<<<<<< HEAD
 
 
 
@@ -47,6 +48,8 @@ Built with cutting-edge tools for a robust full-stack experience:
 
 
 
+=======
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
 LayerTechnologiesPurposeFrontendReact.js, Tailwind CSS, Framer MotionDynamic UI, Styling, AnimationsBackendNode.js, Express.jsAPI Server, Business LogicDatabaseMongoDB (Mongoose)Data Storage, Schema ManagementToolsGit & GitHub, npm/yarnVersion Control, Dependencies
 
 Why MERN? All JavaScript, fast development, and scalable for e-commerce needs.
@@ -60,7 +63,11 @@ MongoDB (local installation or Atlas cloud)
 Git
 
 Installation
+<<<<<<< HEAD
 
+=======
+```
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
 Clone the Repository:
 textgit clone https://github.com/loveychauhan/E-Commerce.git
 cd E-Commerce
@@ -72,8 +79,14 @@ npm install
 # Install frontend dependencies (open a new terminal)
 cd client
 npm install
+<<<<<<< HEAD
 
 Configure Environment:
+=======
+```
+Configure Environment:
+```
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
 
 Create a .env file in the root directory based on .env.example (if provided, or create one):
 textMONGODB_URI=your_mongodb_connection_string  # e.g., mongodb://localhost:27017/ecommerce or Atlas URL
@@ -82,9 +95,16 @@ JWT_SECRET=your_secret_key  # Optional, for future authentication
 
 For MongoDB Atlas, sign up at mongodb.com/cloud/atlas and copy your connection string.
 
+<<<<<<< HEAD
 
 Run the Application:
 text# Start the backend server (root directory)
+=======
+```
+Run the Application:
+text# Start the backend server (root directory)
+```
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
 npm run server
 # Backend runs on http://localhost:5000
 
@@ -104,9 +124,17 @@ Deployment
 Frontend: Deploy to Vercel or Netlify by linking your GitHub repo.
 Backend: Deploy to Render, Heroku, or Railway, ensuring env vars are set.
 Database: Use MongoDB Atlas for a production-ready cloud database.
+<<<<<<< HEAD
 
 📁 Project Structure
 textE-Commerce/
+=======
+```
+
+📁 Project Structure
+```
+E-Commerce/
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
 ├── backend/          # Express.js server, routes, models
 │   ├── models/       # MongoDB schemas (e.g., Product, Cart, Category)
 │   ├── routes/       # API endpoints (e.g., /products, /cart)
@@ -121,14 +149,21 @@ textE-Commerce/
 │   └── tailwind.config.js  # Tailwind CSS configuration
 ├── .env.example      # Template for environment variables
 ├── README.md         # This file!
+<<<<<<< HEAD
 🤝 Contributing
 Love this project? Want to make it better? Here’s how you can help:
+=======
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
 
 Fork the repository.
 Create a new branch (git checkout -b feature/your-feature).
 Make your changes and commit (git commit -m "Add your feature").
 Push to your branch (git push origin feature/your-feature).
 Open a Pull Request with a clear description of your changes.
+<<<<<<< HEAD
+=======
+```
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
 
 Please follow the Contributor Covenant Code of Conduct.
 📜 License
@@ -145,3 +180,7 @@ LinkedIn: Your LinkedIn Profile
 Inspired by modern e-commerce platforms like Amazon and Shopify.
 Thanks to the open-source community for tools like React, Tailwind CSS, and MongoDB.
 Special shoutout to Graphic Era Deemed to be University for the learning environment!
+<<<<<<< HEAD
+=======
+
+>>>>>>> d776a88afedc567600c2fdd0f95c7d9072cc8ff8
