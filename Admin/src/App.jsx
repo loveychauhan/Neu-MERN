@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Sidebar from "./components/Sidebar";
 import Login from "./pages/Login";
+import OrderItem from "./pages/OrderItem";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -19,7 +20,7 @@ function App() {
               <>
                 <Route index element={<Home />} />
                 <Route path="/list-item" element={<Home />} />
-                <Route path="/order-item" element={<Home />} />
+                <Route path="/order-item" element={<OrderItem />} />
               </>
             ) : (
               <Route index element={<Login />} />

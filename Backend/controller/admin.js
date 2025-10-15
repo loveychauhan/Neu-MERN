@@ -2,6 +2,7 @@ import userModel from "../models/userModel.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { productA } from "../models/product.js"
+import orderModel from "../models/orderModel.js"
 
 export const home = async (req, res) => {
     const data = await productA.find()
@@ -62,3 +63,29 @@ export const signUp = async (req, res) => {
 
 }
 
+
+
+
+export const orders = async (req, res) => {
+    const { userId } = req.body
+    try {
+        const order = await orderModel.find({ userId })
+        res.json({ message: 'success', success: true, cartData: order })
+    } catch (error) {
+        res.json({ message: 'cannot access order now!!', success: false })
+    }
+
+}
+
+
+export const showOrderItem = async (req, res) => {
+    const { userId } = req.body
+    try {
+        const data = await orderModel.find()
+
+        res.json({ message: "order Item send", data: data, userId, status: true })
+    } catch (err) {
+        res.json({ message: "Order Item failed", status: false })
+    }
+
+} 

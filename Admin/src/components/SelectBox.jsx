@@ -33,7 +33,6 @@ export default function AnimatedDropdown({
         />
       </button>
 
-      {/* Dropdown Menu */}
       <div
         className={`absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 origin-top ${
           isOpen ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"

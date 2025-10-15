@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 export default function AuthUser(req, res, next) {
-    const authToken = req.headers.authorization
+    const authToken = req.headers.authorization || req.headers
     if (!authToken) {
         return res.json({ message: 'user not Authenticated or Logged In to perform Action.' })
     }
@@ -12,7 +12,7 @@ export default function AuthUser(req, res, next) {
         next()
     } catch (error) {
         res.json({ message: error.message, success: false })
-        console.log('error')
+        console.log()
     }
 
 }  

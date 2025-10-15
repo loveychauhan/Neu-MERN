@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Home() {
   const [option, setOption] = useState("");
-  const category = ["Mens", "Women", "Kids"];
+  const category = ["Men", "Women", "Kids"];
   const subCategory = ["Topwear", "Bottomwear", "WinterWear"];
   const sizeArr = ["S", "M", "L", "XL", "XXL"];
 
@@ -19,8 +19,7 @@ export default function Home() {
   const [sizes, setSizes] = useState([]);
   const [isBestSeller, setIsBestSeller] = useState(false);
 
-  // console.log(images);
-  // console.log(images[0]?.file);
+
   const sizeSelector = (e) => {
     sizes.includes(e.target.innerText)
       ? setSizes(sizes.filter((size) => size !== e.target.innerText))
@@ -33,8 +32,6 @@ export default function Home() {
     e.preventDefault();
 
     const totalImages = images.filter((image) => image !== null);
-    console.log(totalImages[0].file);
-
     const resetForm = () => {
       // setImages([]);
       // setProductName("");
@@ -63,26 +60,21 @@ export default function Home() {
 
       const response = await axios.post(
         "http://localhost:8000/sendData",
-        formData,
-        {
-          headers: {
-            Authorization: "1243",
-          },
-        }
+        formData
       );
 
-      console.log("response", response.data);
+      console.log("response", response);
 
       if (response.data.success) {
         resetForm();
       } else {
         console.log("error while uploading");
       }
+
     } catch (error) {
       console.log("error", error);
     }
   };
-
   return (
     <main className="sm:mx-8 mt-8 sm:mt-20 ">
       <form
@@ -112,7 +104,6 @@ export default function Home() {
                 className="hidden"
                 onChange={(e) => {
                   const file = e.target.files[0];
-                  console.log(file);
                   const updated = [...images];
                   updated[i] = {
                     file,

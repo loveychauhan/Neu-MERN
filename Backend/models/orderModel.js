@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
     cartData: { type: Object, default: {} },
     amount: { type: String },
     paymentMethod: { type: String, default: 'cod' },
-    paymentStatus: { type: String },
+    paymentStatus: { type: Boolean, default: false },
     date: { type: Date, default: Date.now },
 }, { minimize: false })
 

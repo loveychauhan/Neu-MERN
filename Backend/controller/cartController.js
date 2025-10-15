@@ -1,5 +1,4 @@
 import userModel from "../models/userModel.js"
-import jwt from 'jsonwebtoken'
 
 export const cartItem = async (req, res) => {
     try {
@@ -30,8 +29,7 @@ export const cartItem = async (req, res) => {
 export const updateCartItem = async (req, res) => {
     try {
         const { userId, id, size, quantity } = req.body
-
-        console.log(quantity)
+    
         const userData = await userModel.findById(userId)
         let cartData = userData.cartData || {}
 
