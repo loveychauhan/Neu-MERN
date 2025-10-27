@@ -22,8 +22,10 @@ function Login() {
   };
   return (
     <main className="mt-28 max-w-[768px] mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-4">Login</h1>
-      <form
+      <h1 className="text-3xl font-semibold text-center my-4">
+        You have not logged in
+      </h1>
+      {/* <form
         action=""
         className="border p-8 flex flex-col gap-4"
         onSubmit={(e) => submitHandler(e)}>
@@ -56,7 +58,7 @@ function Login() {
         <button className="px-4 py-2 rounded-xl text-white bg-blue-700">
           Login
         </button>
-      </form>
+      </form> */}
     </main>
   );
 }

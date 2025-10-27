@@ -33,14 +33,14 @@ export default function Home() {
 
     const totalImages = images.filter((image) => image !== null);
     const resetForm = () => {
-      // setImages([]);
-      // setProductName("");
-      // setProductDescription("");
-      // setCategoryValue("");
-      // setSubCategoryValue("");
-      // setPrice("");
-      // setSizes("");
-      // setIsBestSeller(false);
+      setImages([]);
+      setProductName("");
+      setProductDescription("");
+      setCategoryValue("");
+      setSubCategoryValue("");
+      setPrice("");
+      setSizes("");
+      setIsBestSeller(false);
     };
 
     try {

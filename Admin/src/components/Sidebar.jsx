@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { IoAddCircleOutline } from "react-icons/io5";
-import { CiViewList } from "react-icons/ci";
+// import { CiViewList } from "react-icons/ci";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 
 export default function Sidebar() {
@@ -16,7 +16,7 @@ export default function Sidebar() {
         <IoAddCircleOutline className="text-2xl" />
         <div>Add Items</div>
       </NavLink>
-      <NavLink
+      {/* <NavLink
         to="/list-item"
         className={({ isActive }) =>
           `flex items-center gap-3 px-4 py-2 border border-gray-200 rounded-md text-sm font-medium ${
@@ -25,7 +25,7 @@ export default function Sidebar() {
         }>
         <CiViewList className="text-2xl" />
         <div>List Items</div>
-      </NavLink>
+      </NavLink> */}
       <NavLink
         to="/order-item"
         className={({ isActive }) =>

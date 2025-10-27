@@ -12,7 +12,7 @@ export default function Navbar() {
         </div>
 
         <button className="px-4 py-2 rounded-xl text-white bg-blue-700">
-          Logout
+          ADMIN
         </button>
       </header>
     </>

@@ -3,28 +3,23 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Sidebar from "./components/Sidebar";
-import Login from "./pages/Login";
 import OrderItem from "./pages/OrderItem";
 
 function App() {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
 
   return (
     <>
-      {token && <Navbar />}
+      <Navbar />
       <div className="flex flex-col mx-4  sm:flex-row items-center sm:items-start ">
-        {token && <Sidebar />}
+        <Sidebar />
         <div className="w-full flex-1">
           <Routes>
-            {token ? (
-              <>
-                <Route index element={<Home />} />
-                <Route path="/list-item" element={<Home />} />
-                <Route path="/order-item" element={<OrderItem />} />
-              </>
-            ) : (
-              <Route index element={<Login />} />
-            )}
+            <>
+              <Route index element={<Home />} />
+              <Route path="/list-item" element={<Home />} />
+              <Route path="/order-item" element={<OrderItem />} />
+            </>
           </Routes>
         </div>
       </div>
