@@ -79,11 +79,10 @@ export const orders = async (req, res) => {
 
 
 export const showOrderItem = async (req, res) => {
-    const { userId } = req.body
     try {
         const data = await orderModel.find()
 
-        res.json({ message: "order Item send", data: data, userId, status: true })
+        res.json({ message: "order Item send", data: data, status: true })
     } catch (err) {
         res.json({ message: "Order Item failed", status: false })
     }

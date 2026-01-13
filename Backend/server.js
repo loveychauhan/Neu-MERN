@@ -30,12 +30,10 @@ app.use(cartRoutes)
 app.use(paymentRoutes)
 app.use(adminRoutes)
 
-// app.get("/", (req, res) => {
-//     res.send('home')
-// })
+
+
 
 
 // Listening
 app.listen(process.env.port, () => {
-    console.log(`server is running at ${process.env.port}`)
 })
