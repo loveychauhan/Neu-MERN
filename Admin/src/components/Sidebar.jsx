@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { IoAddCircleOutline } from "react-icons/io5";
-// import { CiViewList } from "react-icons/ci";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 
 export default function Sidebar() {
